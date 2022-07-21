@@ -1,9 +1,9 @@
 // TODO: Get Client ID from https://developer.spotify.com/dashboard/ and put it here
 const clientId = "b5d998d84e8141b884e112ae23b1e8dd";
 
-const redirectUri = "http://127.0.0.1:5173/";
+const redirectUri = 'http://127.0.0.1:5175/';
 const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&scope=playlist-modify-public&client_id=${clientId}&redirect_uri=${redirectUri}`;
-let accessToken = undefined;
+let accessToken= undefined;
 let expiresIn = undefined;
 
 const Spotify = {
@@ -64,7 +64,6 @@ const Spotify = {
           public: true,
         }),
       });
-      const accessToken = Spotify.getAccessToken ();
       const jsonResponse = await response.json ();
       const playlistId = jsonResponse.id;
       if (playlistId) {
@@ -76,7 +75,8 @@ const Spotify = {
             Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
-            uris: trackUris.map((id) => "spotify:track:".concat(id)),
+            uris: trackUris
+            // uris: trackUris.map((id) => "spotify:track:".concat(id)),
           }),
         });
       }
